@@ -1,0 +1,60 @@
+primeiro passo fazer um foreach em results[0].items.id[] nas categorias PAI na URL: https://www.leroymerlin.com.br/api/v3/categories/tree (arquivo tree.json)
+
+papular as variaveis
+$id_categoy_father: results[0].items.id[]
+$name_categoy_father: results[0].items.name[]
+e salvar os dados na tabela "estoque_categoria_principal"
+
+Segundo passo, quando acessar uma categoria, listar as categorias 02 na URL: "https://www.leroymerlin.com.br/api/boitata/v1/modularContents/{$id_categoy_father}/modules?page=1&device=desktop"
+após acessar a categoria pai, deve-se fazer um foreach em results[0].items.id[]
+
+papular as variaveis
+$id_categoy_first :results[0].items.id[]
+$name_categoy_first: results[0].items.name[]
+e salvar os dados na tabela "estoque_categoria_primaria"
+
+items: [{id: "ad3d3c6b8bf673a358b03e56", name: "Aço para Construção",…},…]
+0:{id: "ad3d3c6b8bf673a358b03e56", name: "Aço para Construção",…}
+1:{id: "5624f5ed55db096c0f74aa53", name: "Argamassa", url: "https://www.leroymerlin.com.br/argamassas",…}
+2:{id: "263b2e9a66560584c3def761", name: "Areia, Pedra Brita, Gesso, Cal e Argila",…}
+3:{id: "5ef3b5a4b31b4a156d33eab6", name: "Barreiras de Proteção",…}
+4:{id: "db70094c75a30e7dd6e008d2", name: "Blocos e Tijolos",…}
+5:{id: "5810dee17f0d0117341def44", name: "Caixas d'Água",…}
+6: {id: "ab1d5baa2d0d84b3a37ed4d5", name: "Cisternas", url: "https://www.leroymerlin.com.br/cisternas",…}
+7:{id: "2d1d33a658942dfe0dd300d8", name: "Calhas e Rufos", url: "https://www.leroymerlin.com.br/calhas",…}
+8:{id: "67c4a6736f44e69d84093b50", name: "Cimento", url: "https://www.leroymerlin.com.br/cimentos",…}
+9:{id: "b58bf502368ddad9e23d55f3", name: "Drenagem de Água e Esgoto",…}
+10:{id: "6cb3de04baebcd2bb3752b4b", name: "Drywall", url: "https://www.leroymerlin.com.br/drywall",…}
+11:{id: "945b05b63a86548c10ac34d7", name: "Equipamentos para Construção",…}
+12:{id: "57e2985f551eaf57da6f57d5", name: "Estruturas Pré-Moldadas",…}
+13:{id: "5395ba67997c85bdd85eeace", name: "Fossa Séptica Biodigestor",…}
+14:{id: "838789b864386ee3f2589e70", name: "Impermeabilizantes",…}
+15:{id: "2abbfaa2b75f598ddd263597", name: "Isolamento Térmico e Acústico",…}
+16:{id: "4ecc36109ca2b87238aeb7d0", name: "Protetores de Obra",…}
+17:{id: "6324ada181357548ce6ce58c", name: "Rejuntes",…}
+18:{id: "55e48c0f2a3fce442c8b40a0", name: "Madeiras para Construção",…}
+19:{id: "547474b2d0da09052a72599d", name: "Steel Frame e Construção a Seco",…}
+20:{id: "e60711577da6a14951fd8c4f", name: "Telhas", url: "https://www.leroymerlin.com.br/telhas",…}
+
+terceiro passo acessar a categoria_secundaria fazendo um foreach na variavel $id_categoy_first para acessar a URL: "https://www.leroymerlin.com.br/api/boitata/v1/modularContents/{$id_categoy_first}/modules?page=1&device=desktop"
+
+papular as variaveis
+$id_categoy_secondary :results[0].items.id[]
+$name_categoy_secondary: results[0].items.name[]
+e salvar os dados na tabela "estoque_categoria_secundaria"
+
+quarto passo acessar a categoria_secundaria fazendo um foreach na variavel $id_categoy_secondary para acessar a URL: "https://www.leroymerlin.com.br/api/boitata/v1/categories/{$id_categoy_secondary}/products?perPage=36"
+
+papular as variaveis
+$title =  products[array].name
+$category_id_principal = $id_categoy_fathe
+$id_categoria_primaria = $id_categoy_first
+$id_categoria_secundaria = $id_categoy_secondary
+$brand_id = products[array].brand
+$description = products[array].name
+$price = products[array].price{
+  "integers": "25",
+  "decimals": "00"
+}
+$picture = products[array].picture
+
